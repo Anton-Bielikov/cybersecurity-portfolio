@@ -46,7 +46,7 @@ This filter revealed HTTP traffic between the external server and an internal ho
 
 Since this host is the internal system generating the suspicious outbound traffic to the flagged external IP address, it was identified as the infected Windows client.
 
-Answer: 10.1.21.58 ![alt text](network-forensics/pcap-investigation-1/task 1.png)
+Answer: 10.1.21.58 ![alt text](https://github.com/Anton-Bielikov/cybersecurity-portfolio/blob/main/network-forensics/pcap-investigation-1/task%201.png)
 
 Task 2
 After identifying the infected workstation as 10.1.21.58, the next step was to determine its MAC address using the provided PCAP file in Wireshark.
