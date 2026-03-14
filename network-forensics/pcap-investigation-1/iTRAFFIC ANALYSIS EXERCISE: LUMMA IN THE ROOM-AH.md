@@ -28,7 +28,6 @@ For this exercise, answer the following questions for your incident report:
 
 
 Task 1
-
 According to the exercise description on Malware‑Traffic‑Analysis.net, the internal network uses the 10.1.21.0/24 subnet. The known infrastructure hosts are:
 
 10.1.21.1 – Gateway
@@ -47,6 +46,81 @@ This filter revealed HTTP traffic between the external server and an internal ho
 
 Since this host is the internal system generating the suspicious outbound traffic to the flagged external IP address, it was identified as the infected Windows client.
 
-Answer: 10.1.21.58
+Answer: 10.1.21.58 (network-forensics/pcap-investigation-1/task 1.png)
 
+Task 2
+After identifying the infected workstation as 10.1.21.58, the next step was to determine its MAC address using the provided PCAP file in Wireshark.
+
+First, a display filter was applied to isolate all traffic related to the infected host:
+
+ip.addr == 10.1.21.58
+
+This filter allowed inspection of packets sent or received by the suspected system.
+
+To identify the MAC address associated with this IP, ARP traffic was analyzed. ARP packets reveal the relationship between IP addresses and hardware (MAC) addresses on the local network. By reviewing ARP requests and responses involving 10.1.21.58, the corresponding Ethernet address was observed.
+
+Opening one of these packets and expanding the Ethernet II header shows the Source MAC address of the host generating the traffic.
+
+The analysis revealed the following mapping:
+
+IP address: 10.1.21.58
+
+MAC address: 00:21:5d:c8:0e:f2
+
+Therefore, the MAC address of the infected Windows client is 00:21:5d:c8:0e:f2 (network-forensics/pcap-investigation-1/task 2.png)
+
+Task 3
+To determine the hostname of the infected system, the PCAP file was analyzed using Wireshark.
+
+Since the infected host had already been identified as 10.1.21.58, a display filter was applied to isolate NetBIOS Name Service (NBNS) traffic associated with this IP address:
+
+nbns && ip.addr == 10.1.21.58
+
+NBNS traffic is commonly used by Windows systems to register and resolve hostnames within a local network.
+
+The filtered results showed several NBNS Registration packets originating from the infected host. In the packet details under NetBIOS Name Service, the registered name was observed as:
+
+DESKTOP-ES9F3ML
+
+This value represents the hostname of the infected Windows client.
+
+Answer: DESKTOP-ES9F3ML (network-forensics/pcap-investigation-1/task 3.png)
+
+Task 4
+Focused on Kerberos authentication traffic to extract user credentials, applying the display filter:
+
+kerberos.CNameString
+
+Examined the Kerberos packets and located the Client Name field, which revealed the username:
+
+answer: gwyatt (network-forensics/pcap-investigation-1/task 4.png)
+
+Task 5
+Focused on SAMR (Security Account Manager Remote) and SMB2 traffic, which contains user account information.
+
+Applied the display filter:
+
+samr
+
+or specifically looked at QueryUserInfo response packets.
+In the packet details pane, expanded the fields under:
+
+samr.samr_UserInfo2:full_name
+
+Located the Full Name field, which revealed:
+
+Gabriel Wyatt
+
+answer: Gabriel Wyatt (network-forensics/pcap-investigation-1/task 5.png)
+
+Task 6
+I applied the following display filter to show only HTTP requests and TLS Client Hello packets containing SNI:
+
+(http.request or tls.handshake.extensions_server_name) and !(ssdp)
+
+After applying the filter, the packet list showed only traffic where hostnames are visible. I selected each TLS Client Hello and expanded the Server Name Indication (SNI) field to extract the domain names. One example visible in my capture is:
+answer:
+communicationfirewall-security[.]cc
+holiday-forever[.]cc 
+(network-forensics/pcap-investigation-1/task 6.png)
 
