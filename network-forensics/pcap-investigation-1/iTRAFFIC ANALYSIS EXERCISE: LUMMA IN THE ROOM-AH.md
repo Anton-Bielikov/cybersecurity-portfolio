@@ -67,7 +67,7 @@ IP address: 10.1.21.58
 
 MAC address: 00:21:5d:c8:0e:f2
 
-Therefore, the MAC address of the infected Windows client is 00:21:5d:c8:0e:f2 (network-forensics/pcap-investigation-1/task 2.png)
+Therefore, the MAC address of the infected Windows client is 00:21:5d:c8:0e:f2 ![alt text](https://github.com/Anton-Bielikov/cybersecurity-portfolio/blob/main/network-forensics/pcap-investigation-1/task%202.png)
 
 Task 3
 To determine the hostname of the infected system, the PCAP file was analyzed using Wireshark.
@@ -84,7 +84,7 @@ DESKTOP-ES9F3ML
 
 This value represents the hostname of the infected Windows client.
 
-Answer: DESKTOP-ES9F3ML (network-forensics/pcap-investigation-1/task 3.png)
+Answer: DESKTOP-ES9F3ML ![alt text](https://github.com/Anton-Bielikov/cybersecurity-portfolio/blob/main/network-forensics/pcap-investigation-1/task%203.png)
 
 Task 4
 Focused on Kerberos authentication traffic to extract user credentials, applying the display filter:
@@ -93,8 +93,7 @@ kerberos.CNameString
 
 Examined the Kerberos packets and located the Client Name field, which revealed the username:
 
-answer: gwyatt (network-forensics/pcap-investigation-1/task 4.png)
-
+answer: gwyatt ![alt text](https://github.com/Anton-Bielikov/cybersecurity-portfolio/blob/main/network-forensics/pcap-investigation-1/task%204.png)
 Task 5
 Focused on SAMR (Security Account Manager Remote) and SMB2 traffic, which contains user account information.
 
@@ -111,7 +110,7 @@ Located the Full Name field, which revealed:
 
 Gabriel Wyatt
 
-answer: Gabriel Wyatt (network-forensics/pcap-investigation-1/task 5.png)
+answer: Gabriel Wyatt ![alt text](https://github.com/Anton-Bielikov/cybersecurity-portfolio/blob/main/network-forensics/pcap-investigation-1/task%205.png)
 
 Task 6
 I applied the following display filter to show only HTTP requests and TLS Client Hello packets containing SNI:
@@ -122,5 +121,5 @@ After applying the filter, the packet list showed only traffic where hostnames a
 answer:
 communicationfirewall-security[.]cc
 holiday-forever[.]cc 
-(network-forensics/pcap-investigation-1/task 6.png)
+![alt text](https://github.com/Anton-Bielikov/cybersecurity-portfolio/blob/main/network-forensics/pcap-investigation-1/task%206.png)
 
