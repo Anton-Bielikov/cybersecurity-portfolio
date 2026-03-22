@@ -1,8 +1,8 @@
 https://app.letsdefend[.]io/challenge/ics-fuelstation
 
-#Threat Hunting Report - ICS Fuel Station
+# Threat Hunting Report - ICS Fuel Station
 
-##Scenario
+## Scenario
 Demonstrate your **threat hunting** and **network traffic** analysis skills by uncovering a C2 communications–related incident. On one of the organization’s critical endpoints, a suspicious file with an unusual extension was flagged by security tooling. Analyze the provided network traffic to trace the attacker’s activity and identify the threat.
 ---
 
