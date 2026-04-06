@@ -11,15 +11,3 @@ Select-Object -First 10 Count, @{Name="Hour"; Expression={($_.Name -split ", ")[
 @{Name="Ip"; Expression={($_.Name -split ", ")[1]}}
 
 Write-Output $errors | Format-Table -AutoSize
-
-**Skrypt analizuje plik logów z systemu Linux, wyszukując wpisy zawierające słowo "Failed". Następnie:**
-
-**wyciąga z każdej linii godzinę zdarzenia oraz adres IP,**
-
-**grupuje dane według kombinacji godzina + IP,**
-
-**filtruje tylko te adresy, które wygenerowały więcej niż 3 błędy,**
-
-**sortuje wyniki malejąco i wyświetla TOP 10 najbardziej podejrzanych IP.**
-
-**Skrypt służy do szybkiej identyfikacji nietypowej aktywności, np. prób nieautoryzowanego logowania lub ataków brute‑force.**
