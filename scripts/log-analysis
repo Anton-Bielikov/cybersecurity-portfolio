@@ -1,4 +1,4 @@
-$logs= Get-Content "C:\\Linux_2k.log"
+$logs= Get-Content "scripts/Lin_ux.log"
 $errors= $logs |
 Where-Object {$_ -match "Failed"} |
 Select-Object @{Name="Hour"; Expression={ if ($_ -match "\d{2}:\d{2}:\d{2}") { $Matches[0].Split(':')[0] } else {"Unknown"} }} ,
@@ -12,14 +12,14 @@ Select-Object -First 10 Count, @{Name="Hour"; Expression={($_.Name -split ", ")[
 
 Write-Output $errors | Format-Table -AutoSize
 
-#Skrypt analizuje plik logów z systemu Linux, wyszukując wpisy zawierające słowo "Failed". Następnie:
+**Skrypt analizuje plik logów z systemu Linux, wyszukując wpisy zawierające słowo "Failed". Następnie:**
 
-#wyciąga z każdej linii godzinę zdarzenia oraz adres IP,
+**wyciąga z każdej linii godzinę zdarzenia oraz adres IP,**
 
-#grupuje dane według kombinacji godzina + IP,
+**grupuje dane według kombinacji godzina + IP,**
 
-#filtruje tylko te adresy, które wygenerowały więcej niż 3 błędy,
+**filtruje tylko te adresy, które wygenerowały więcej niż 3 błędy,**
 
-#sortuje wyniki malejąco i wyświetla TOP 10 najbardziej podejrzanych IP.
+**sortuje wyniki malejąco i wyświetla TOP 10 najbardziej podejrzanych IP.**
 
-#Skrypt służy do szybkiej identyfikacji nietypowej aktywności, np. prób nieautoryzowanego logowania lub ataków brute‑force.
+**Skrypt służy do szybkiej identyfikacji nietypowej aktywności, np. prób nieautoryzowanego logowania lub ataków brute‑force.**
